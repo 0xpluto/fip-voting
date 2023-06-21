@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 import ViewVote from "../components/ViewVote";
 import TotalVotes from "../components/TotalVotes";
 import VotingPower from "../components/VotingPower";
+import Vote from "../components/Vote";
 
 export const data = {
   labels: ["Yes", "No", "Abstain"],
@@ -41,7 +42,7 @@ export default function Home() {
           />
         </ContainerDiv>
         <ContainerDiv>
-          <TotalVotes {...data} />
+          <Vote />
         </ContainerDiv>
         <ContainerDiv>
           <VotingPower yes={38} no={68} abstain={62} />
