@@ -107,3 +107,19 @@ The returned json will be in the format below.
 Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`. The `address` parameter is the 20 byte hex address which miners have delegated their votes to.
 
 The HTTP body returned will be a unsigned 128 bit integer for the voting power in bytes.
+
+### /filecoin/voterstarters?network=calibration
+
+Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`.
+
+This endpoint will return a json vector of the addresses that are allowed to start a vote like below
+
+```json
+[
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000"
+]
+```
+
+These addresses are the only address that are allowed to start a vote on the requested network
