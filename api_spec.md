@@ -40,6 +40,19 @@ The message will be the FIP number that to start the vote for. It will start wit
 
 If the vote has successfully been started the server will respond with 200 and the HTTP body will the amount of seconds that the vote is live for.
 
+### /filecoin/registerstarter?network=calibration
+
+The parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`. The accompanying json body is built like the following
+
+```json
+{
+    "signature": "0x67ae6539cd110b9a043e3836303771d8a8ec13c7c688f369cc1a8a9f997128bf207319c7e94a60f9739c51510cb483c8f0c2efa32147690ae8221c08d34352ec1b",
+    "message": "0x3B9705F0EF88Ee74B9924e34A5Af578d2E24F300"
+}
+```
+
+This will add the address in the message to the list of authorized signers that can start a vote. Now the address in the message is also able to start a vote.
+
 ## GET Requests
 
 ### /filecoin/vote?fip_number=1&network=mainnet
