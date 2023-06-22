@@ -2,28 +2,6 @@ import { PropsWithChildren } from "react";
 import ViewVote from "../components/ViewVote";
 import TotalVotes from "../components/TotalVotes";
 import VotingPower from "../components/VotingPower";
-import Vote from "../components/Vote";
-
-export const data = {
-  labels: ["Yes", "No", "Abstain"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [12, 19, 3],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
 const ContainerDiv = ({ children }: PropsWithChildren) => {
   return (
@@ -42,7 +20,7 @@ export default function Home() {
           />
         </ContainerDiv>
         <ContainerDiv>
-          <Vote />
+          <TotalVotes />
         </ContainerDiv>
         <ContainerDiv>
           <VotingPower yes={38} no={68} abstain={62} />

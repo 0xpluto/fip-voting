@@ -1,14 +1,46 @@
 import React, { FunctionComponent, useState } from "react";
 import { useSignMessage } from "wagmi";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const Vote: FunctionComponent = () => {
+  const router = useRouter();
   const [message, setMessage] = useState<string>("");
   const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
-    message,
+    message: `${message}: FIP-${parseInt(
+      router.query.fip?.slice(-2) as string
+    )}`,
     onSettled(data, error) {
       console.log("Settled", { data, error });
+      axios
+        .post(
+          `http://18.116.124.40/filecoin/vote?fip_number=${parseInt(
+            router.query.fip?.slice(-2) as string
+          )}&network=mainnet`,
+          {
+            signature: data,
+            message: `${message}: FIP-${parseInt(
+              router.query.fip?.slice(-2) as string
+            )}`,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   });
+
+  console.log(
+    `${message}: FIP-${parseInt(router.query.fip?.slice(-2) as string)}`
+  );
 
   return (
     <>

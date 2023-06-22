@@ -1,14 +1,7 @@
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
-import { useAccount, useConnect, useEnsName } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
 
 const Header: FunctionComponent = () => {
-  const { address, isConnected } = useAccount();
-  const { data: ensName } = useEnsName({ address });
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -38,9 +31,9 @@ const Header: FunctionComponent = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
@@ -54,14 +47,6 @@ const Header: FunctionComponent = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                href="/vote"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Vote
-              </Link>
-            </li>
 
             <li>
               <Link
@@ -70,13 +55,6 @@ const Header: FunctionComponent = () => {
               >
                 Previous Votes
               </Link>
-            </li>
-            <li>
-              {isConnected ? (
-                <div>Connected to {address}</div>
-              ) : (
-                <button onClick={() => connect()}>Connect Wallet</button>
-              )}
             </li>
           </ul>
         </div>

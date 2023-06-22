@@ -1,4 +1,6 @@
-import { FunctionComponent } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { FunctionComponent, useEffect, useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -20,7 +22,7 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
             text={`${yes}%`}
           />
         </div>
-        <div className="ml-5">8 TB</div>
+        <div className="ml-5">{yes} TB</div>
       </div>
       <div className="flex flex-row items-center mb-3">
         <div style={{ width: "100px", height: "100px" }}>
@@ -30,7 +32,7 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
             text={`${no}%`}
           />
         </div>
-        <div className="ml-5">8 TB</div>
+        <div className="ml-5">{no} TB</div>
       </div>
       <div className="flex flex-row items-center">
         <div style={{ width: "100px", height: "100px" }}>
@@ -40,7 +42,7 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
             text={`${abstain}%`}
           />
         </div>
-        <div className="ml-5">8 TB</div>
+        <div className="ml-5">{abstain} TB</div>
       </div>
     </div>
   );
