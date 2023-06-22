@@ -59,7 +59,7 @@ This will add the address in the message to the list of authorized signers that 
 
 Query parameter `fip_number` is used to specify which FIP to pull votes for. The parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`.
 
-If the vote is in progress then a 403 error will be returned. If the vote does not exist then a 404 error will be returned. If the vote has concluded then the results will be returned in json as follows
+If the vote has concluded then the results will be returned in json as follows
 
 ```json
     {
@@ -73,6 +73,20 @@ If the vote is in progress then a 403 error will be returned. If the vote does n
 ```
 
 The storage size is in bytes.
+
+This endpoint is contains all the information needed on a vote. There are 4 possibilities
+
+1. Does Not Exist - 404
+
+   * This response will be returned when the vote has not started. This vote does not exist.
+
+2. Concluded - 200
+
+   * This response will be returned when the vote is finished. The HTTP body will result in the above with all of the vote results.
+
+3. InProgress - 200
+
+   * This response will be returned when the vote has started. The HTTP body will be the time left on the vote in seconds
 
 ### /filecoin/delegates?network=mainnet&address=0x0000000000000000000000000000000000000000
 
@@ -93,4 +107,3 @@ The returned json will be in the format below.
 Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`. The `address` parameter is the 20 byte hex address which miners have delegated their votes to.
 
 The HTTP body returned will be a unsigned 128 bit integer for the voting power in bytes.
-
