@@ -23,6 +23,23 @@ This is the main endpoint being hit from the frontend to cast votes.
 
 If the vote is in progress then a 403 error will be returned and the HTTP body will be the amount of time left for the vote in seconds. If the vote does not exist then a 404 error will be returned.
 
+### /filecoin/startvote?network=calibration
+
+The parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`. The accompanying json body is built like the following
+
+```json
+{
+    "signature": "0x67ae6539cd110b9a043e3836303771d8a8ec13c7c688f369cc1a8a9f997128bf207319c7e94a60f9739c51510cb483c8f0c2efa32147690ae8221c08d34352ec1b",
+    "message": "FIP-123"
+}
+```
+
+The signature is 65 bytes produced from signing the `"message"` field
+
+The message will be the FIP number that to start the vote for. It will start with `FIP-` then the number to start the vote on.
+
+If the vote has successfully been started the server will respond with 200 and the HTTP body will the amount of seconds that the vote is live for.
+
 ## GET Requests
 
 ### /filecoin/vote?fip_number=1&network=mainnet
@@ -63,3 +80,4 @@ The returned json will be in the format below.
 Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`. The `address` parameter is the 20 byte hex address which miners have delegated their votes to.
 
 The HTTP body returned will be a unsigned 128 bit integer for the voting power in bytes.
+
