@@ -123,3 +123,31 @@ This endpoint will return a json vector of the addresses that are allowed to sta
 ```
 
 These addresses are the only address that are allowed to start a vote on the requested network
+
+### /filecoin/activevotes?network=calibration
+
+Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`.
+
+This endpoint will return a json vector of the fip numbers that have a vote in progress like below
+
+```json
+[
+    123,
+    456,
+    789
+]
+```
+
+### /filecoin/votehistory?network=calibration
+
+Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`.
+
+This endpoint will return a json vector of the fip numbers of votes that have concluded
+
+```json
+[
+    123,
+    456,
+    789
+]
+```
