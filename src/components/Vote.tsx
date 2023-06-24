@@ -49,7 +49,7 @@ const Vote: FunctionComponent = () => {
         <div
           className={
             message === "NAY"
-              ? " border-4 rounded-md"
+              ? " border-4 border-neutral-800 rounded-md"
               : "hover:border-4 rounded-md"
           }
           style={{ height: "50px", width: "100%", background: "#ED2939" }}
@@ -58,8 +58,8 @@ const Vote: FunctionComponent = () => {
         <div
           className={
             message === "ABSTAIN"
-              ? "border-4 rounded-md"
-              : "hover:border-4 rounded-md"
+              ? "border-5 border-neutral-800 rounded-md"
+              : "hover:border-5 rounded-md"
           }
           style={{ height: "50px", width: "100%", background: "#FDDA0D" }}
           onClick={() => setMessage("ABSTAIN")}
@@ -67,7 +67,7 @@ const Vote: FunctionComponent = () => {
         <div
           className={
             message === "YAY"
-              ? "border-4 rounded-md"
+              ? "border-4 border-neutral-800 rounded-md"
               : "hover:border-4 rounded-md"
           }
           style={{ height: "50px", width: "100%", background: "#228B22" }}

@@ -12,6 +12,7 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import ContainerDiv from "@/components/ContainerDiv";
 
 export default function Home(props: any) {
+  const [active, setActive] = useState(false);
   const { address, isConnected } = useAccount();
   const { data: ensName } = useEnsName({ address });
   const { connect } = useConnect({
@@ -49,37 +50,34 @@ export default function Home(props: any) {
           router.query.fip?.slice(-2) as string
         )}&network=calibration`
       );
-      console.log(res);
-      setVotes(JSON.parse(res.data));
+      console.log(typeof res.data);
+      if (typeof res.data === "string") {
+        setVotes(JSON.parse(res.data));
+      } else {
+        setActive(true);
+        setTime(res.data);
+      }
     } catch (error: any) {
       console.log(error.response.status);
       setError(error.response.status);
-      setTime(error.response.data);
       console.log(error.response.data);
     }
   };
 
   console.log("Votes", children![8].content);
+  console.log(error);
 
   return (
     <>
-      {/* <div className="my-4">
-        <ContainerDiv>
-          <div className="flex flex-row justify-between">
-            {error === 403 && <Countdown date={Date.now() + time * 1000} />}
-            {isConnected ? (
-              <div>Connected to {address}</div>
-            ) : (
-              <button
-                className="bg-orange-400 px-3 py-2 rounded-md shadow-sm text-white"
-                onClick={() => connect()}
-              >
-                Connect Wallet
-              </button>
-            )}
-          </div>
-        </ContainerDiv>
-      </div> */}
+      <div className="my-4">
+        {active && (
+          <ContainerDiv>
+            <div className="flex flex-row justify-between">
+              <Countdown date={Date.now() + time * 1000} />
+            </div>
+          </ContainerDiv>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <ContainerDiv>
@@ -92,7 +90,7 @@ export default function Home(props: any) {
           />
         </ContainerDiv>
         <ContainerDiv>
-          {!error && votes ? <TotalVotes votes={votes} /> : <Vote />}
+          {!active ? <TotalVotes votes={votes} /> : <Vote />}
         </ContainerDiv>
         <ContainerDiv>
           {!votes ? (
