@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ViewVote from "../../components/ViewVote";
 import TotalVotes from "../../components/TotalVotes";
 import VotingPower from "../../components/VotingPower";
@@ -9,12 +9,7 @@ import { useRouter } from "next/router";
 import Countdown from "react-countdown";
 import { useAccount, useConnect, useEnsName } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
-
-const ContainerDiv = ({ children }: PropsWithChildren) => {
-  return (
-    <div className="bg-white rounded-md shadow-md p-3 md:p-5">{children}</div>
-  );
-};
+import ContainerDiv from "@/components/ContainerDiv";
 
 export default function Home(props: any) {
   const { address, isConnected } = useAccount();
@@ -54,6 +49,7 @@ export default function Home(props: any) {
           router.query.fip?.slice(-2) as string
         )}&network=calibration`
       );
+      console.log(res);
       setVotes(JSON.parse(res.data));
     } catch (error: any) {
       console.log(error.response.status);
@@ -67,7 +63,7 @@ export default function Home(props: any) {
 
   return (
     <>
-      <div className="my-4">
+      {/* <div className="my-4">
         <ContainerDiv>
           <div className="flex flex-row justify-between">
             {error === 403 && <Countdown date={Date.now() + time * 1000} />}
@@ -83,7 +79,7 @@ export default function Home(props: any) {
             )}
           </div>
         </ContainerDiv>
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <ContainerDiv>

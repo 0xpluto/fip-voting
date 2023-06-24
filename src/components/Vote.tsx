@@ -14,7 +14,7 @@ const Vote: FunctionComponent = () => {
       console.log("Settled", { data, error });
       axios
         .post(
-          `http://18.116.124.40/filecoin/vote?fip_number=${parseInt(
+          `${process.env.NEXT_PUBLIC_API}/filecoin/vote?fip_number=${parseInt(
             router.query.fip?.slice(-2) as string
           )}&network=mainnet`,
           {
@@ -47,18 +47,30 @@ const Vote: FunctionComponent = () => {
       <div className="text-sm text-neutral-400 mb-3">Choose Vote</div>
       <div className="flex flex-col gap-4">
         <div
-          className="hover:border-4"
-          style={{ height: "50px", width: "100%", background: "red" }}
+          className={
+            message === "NAY"
+              ? " border-4 rounded-md"
+              : "hover:border-4 rounded-md"
+          }
+          style={{ height: "50px", width: "100%", background: "#ED2939" }}
           onClick={() => setMessage("NAY")}
         ></div>
         <div
-          className="hover:border-4"
-          style={{ height: "50px", width: "100%", background: "yellow" }}
+          className={
+            message === "ABSTAIN"
+              ? "border-4 rounded-md"
+              : "hover:border-4 rounded-md"
+          }
+          style={{ height: "50px", width: "100%", background: "#FDDA0D" }}
           onClick={() => setMessage("ABSTAIN")}
         ></div>
         <div
-          className="hover:border-4"
-          style={{ height: "50px", width: "100%", background: "green" }}
+          className={
+            message === "YAY"
+              ? "border-4 rounded-md"
+              : "hover:border-4 rounded-md"
+          }
+          style={{ height: "50px", width: "100%", background: "#228B22" }}
           onClick={() => setMessage("YAY")}
         ></div>
         <button

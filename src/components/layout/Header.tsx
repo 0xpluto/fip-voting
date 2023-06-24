@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
+import ConnectWallet from "../ConnectWallet";
 
 const Header: FunctionComponent = () => {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" className="flex items-center">
+        {/* <a href="https://flowbite.com/" className="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-8 mr-3"
@@ -14,7 +15,8 @@ const Header: FunctionComponent = () => {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Flowbite
           </span>
-        </a>
+        </a> */}
+        <div></div>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -55,6 +57,9 @@ const Header: FunctionComponent = () => {
               >
                 Previous Votes
               </Link>
+            </li>
+            <li>
+              <ConnectWallet />
             </li>
           </ul>
         </div>

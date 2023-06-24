@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
-import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 type Props = {
@@ -20,6 +20,10 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
             className="basis-1/2 mr-3"
             value={yes}
             text={`${yes}%`}
+            styles={buildStyles({
+              pathColor: `#228B22`,
+              textColor: `#228B22`,
+            })}
           />
         </div>
         <div className="ml-5">{yes} TB</div>
@@ -30,6 +34,10 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
             className="basis-1/2 mr-3"
             value={no}
             text={`${no}%`}
+            styles={buildStyles({
+              pathColor: `#ED2939`,
+              textColor: `#ED2939`,
+            })}
           />
         </div>
         <div className="ml-5">{no} TB</div>
@@ -40,6 +48,10 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
             className="basis-1/2 mr-3"
             value={abstain}
             text={`${abstain}%`}
+            styles={buildStyles({
+              pathColor: `#FDDA0D`,
+              textColor: `#FDDA0D`,
+            })}
           />
         </div>
         <div className="ml-5">{abstain} TB</div>
