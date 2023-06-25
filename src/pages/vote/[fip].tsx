@@ -10,6 +10,8 @@ import Countdown from "react-countdown";
 import { useAccount, useConnect, useEnsName } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import ContainerDiv from "@/components/ContainerDiv";
+import StartVote from "@/components/startVote";
+import { ToastContainer } from "react-toastify";
 
 export default function Home(props: any) {
   const [active, setActive] = useState(false);
@@ -70,13 +72,12 @@ export default function Home(props: any) {
   return (
     <>
       <div className="my-4">
-        {active && (
-          <ContainerDiv>
-            <div className="flex flex-row justify-between">
-              <Countdown date={Date.now() + time * 1000} />
-            </div>
-          </ContainerDiv>
-        )}
+        <ContainerDiv>
+          <div className="flex flex-row justify-between">
+            {active && <Countdown date={Date.now() + time * 1000} />}
+            <StartVote />
+          </div>
+        </ContainerDiv>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,6 +105,18 @@ export default function Home(props: any) {
           )}
         </ContainerDiv>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

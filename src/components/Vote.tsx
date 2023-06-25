@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { useSignMessage } from "wagmi";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Vote: FunctionComponent = () => {
   const router = useRouter();
@@ -30,7 +31,16 @@ const Vote: FunctionComponent = () => {
           }
         )
         .then(function (response) {
-          console.log(response);
+          toast.success("Vote casted successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         })
         .catch(function (error) {
           console.log(error);
@@ -49,30 +59,36 @@ const Vote: FunctionComponent = () => {
         <div
           className={
             message === "NAY"
-              ? " border-4 border-neutral-800 rounded-md"
-              : "hover:border-4 rounded-md"
+              ? " border-4 border-neutral-800 rounded-md text-center"
+              : "hover:border-4 rounded-md text-center"
           }
           style={{ height: "50px", width: "100%", background: "#ED2939" }}
           onClick={() => setMessage("NAY")}
-        ></div>
+        >
+          NAY
+        </div>
         <div
           className={
             message === "ABSTAIN"
-              ? "border-5 border-neutral-800 rounded-md"
-              : "hover:border-5 rounded-md"
+              ? "border-5 border-neutral-800 rounded-md text-center"
+              : "hover:border-5 rounded-md text-center"
           }
           style={{ height: "50px", width: "100%", background: "#FDDA0D" }}
           onClick={() => setMessage("ABSTAIN")}
-        ></div>
+        >
+          ABSTAIN
+        </div>
         <div
           className={
             message === "YAY"
-              ? "border-4 border-neutral-800 rounded-md"
-              : "hover:border-4 rounded-md"
+              ? "border-4 border-neutral-800 rounded-md text-center"
+              : "hover:border-4 rounded-md text-center"
           }
           style={{ height: "50px", width: "100%", background: "#228B22" }}
           onClick={() => setMessage("YAY")}
-        ></div>
+        >
+          YAY
+        </div>
         <button
           onClick={() => signMessage()}
           className="w-100 bg-slate-400 rounded-sm py-2"
