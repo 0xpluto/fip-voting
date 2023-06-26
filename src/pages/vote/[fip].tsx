@@ -12,6 +12,7 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import ContainerDiv from "@/components/ContainerDiv";
 import StartVote from "@/components/startVote";
 import WalletVotingPower from "@/components/WalletVotingPower";
+import PreviousVotes from "../../components/PreviousVotes";
 
 export default function Home(props: any) {
   const [active, setActive] = useState(false);
@@ -103,6 +104,11 @@ export default function Home(props: any) {
               abstain={(votes as any).abstain_storage_size}
             />
           )}
+        </ContainerDiv>
+      </div>
+      <div className="mt-4">
+        <ContainerDiv>
+          <PreviousVotes />
         </ContainerDiv>
       </div>
     </>
