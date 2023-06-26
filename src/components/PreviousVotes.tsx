@@ -116,9 +116,9 @@ export default function App() {
 
   const createDatasets = (d: any) => {
     let buffer = [];
-    let yay: number[] = [1];
-    let nay: number[] = [2];
-    let abstain: number[] = [3];
+    let yay: number[] = [];
+    let nay: number[] = [];
+    let abstain: number[] = [];
     Object.keys(d).map((l) => {
       yay.push(d[l].yay);
       nay.push(d[l].nay);
