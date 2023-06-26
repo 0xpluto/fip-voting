@@ -11,7 +11,7 @@ import { useAccount, useConnect, useEnsName } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import ContainerDiv from "@/components/ContainerDiv";
 import StartVote from "@/components/startVote";
-import { ToastContainer } from "react-toastify";
+import WalletVotingPower from "@/components/WalletVotingPower";
 
 export default function Home(props: any) {
   const [active, setActive] = useState(false);
@@ -66,9 +66,9 @@ export default function Home(props: any) {
     }
   };
 
-  console.log("Votes", children![8].content);
-  console.log(error);
-
+  if (props.data === "notfound") {
+    return <ContainerDiv>No such FIP</ContainerDiv>;
+  }
   return (
     <>
       <div className="my-4">
@@ -94,8 +94,8 @@ export default function Home(props: any) {
           {!active ? <TotalVotes votes={votes} /> : <Vote />}
         </ContainerDiv>
         <ContainerDiv>
-          {!votes ? (
-            <VotingPower yes={0} no={0} abstain={0} />
+          {active ? (
+            <WalletVotingPower />
           ) : (
             <VotingPower
               yes={(votes as any).yay_storage_size}
@@ -105,18 +105,6 @@ export default function Home(props: any) {
           )}
         </ContainerDiv>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </>
   );
 }
@@ -124,11 +112,15 @@ export default function Home(props: any) {
 export async function getServerSideProps(ctx: any) {
   // Fetch data from external API
   const { fip } = ctx.query;
-  const res = await axios.get(
-    `https://raw.githubusercontent.com/filecoin-project/FIPs/master/FIPS/${fip}.md`
-  );
-  const data = res.data;
+  try {
+    const res = await axios.get(
+      `https://raw.githubusercontent.com/filecoin-project/FIPs/master/FIPS/${fip}.md`
+    );
+    const data = res.data;
 
-  // Pass data to the page via props
-  return { props: { data } };
+    // Pass data to the page via props
+    return { props: { data } };
+  } catch (error) {
+    return { props: { data: "notfound" } };
+  }
 }

@@ -42,6 +42,16 @@ export default function StartVote() {
         })
         .catch(function (error) {
           console.log(error);
+          toast.error(error.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         });
     },
   });
@@ -72,7 +82,11 @@ export default function StartVote() {
       <div className="flex flex-row items-center  ">
         <label className="">
           Choose FIP:
-          <select value={FIP} onChange={(e) => setFip(e.target.value)}>
+          <select
+            className="dark:bg-slate-600 mx-3 rounded-md p-2"
+            value={FIP}
+            onChange={(e) => setFip(e.target.value)}
+          >
             <option value="FIP-1">FIP-1</option>
             <option value="FIP-2">FIP-2</option>
             <option value="FIP-3">FIP-3</option>
@@ -140,7 +154,7 @@ export default function StartVote() {
         </label>
         <button
           onClick={() => signMessage()}
-          className="bg-green-500 shadow-md  py-3 px-4 rounded-md"
+          className="bg-green-500 shadow-md  py-2 px-4 rounded-md"
         >
           Start Votes
         </button>
