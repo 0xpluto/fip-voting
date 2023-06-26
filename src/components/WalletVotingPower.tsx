@@ -6,8 +6,6 @@ const WalletVotingPower = () => {
   const { address, isConnected } = useAccount();
   const [votingPower, setVotingPower] = useState(0);
 
-  console.log(address, isConnected);
-
   useEffect(() => {
     if (isConnected) fetchVotingPower();
   }, [address]);
@@ -18,7 +16,6 @@ const WalletVotingPower = () => {
         `${process.env.NEXT_PUBLIC_API}/filecoin/votingpower?network=mainnet&address=${address}`
       );
 
-      console.log("Wallet Voting Power", res);
       setVotingPower(res.data);
     } catch (error) {
       console.log(error);

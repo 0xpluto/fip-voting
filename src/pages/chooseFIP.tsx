@@ -12,8 +12,6 @@ const ContainerDiv = ({ children }: PropsWithChildren) => {
 export default function Home() {
   const [fip, setFip] = useState("fip-0001");
 
-  console.log(fip);
-
   return (
     <div className="max-w-sm mx-auto">
       <ContainerDiv>

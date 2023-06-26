@@ -47,6 +47,7 @@ export default function Home(props: any) {
   }, []);
 
   const fetchVotes = async () => {
+    setActive(false);
     try {
       const res = await axios.get(
         `http://18.116.124.40/filecoin/vote?fip_number=${parseInt(
@@ -54,16 +55,18 @@ export default function Home(props: any) {
         )}&network=calibration`
       );
       console.log(typeof res.data);
-      if (typeof res.data === "string") {
-        setVotes(JSON.parse(res.data));
+      console.log("INSDIE ", res.data);
+      console.log(Object.hasOwn(res.data, "yay"));
+      if (Object.hasOwn(res.data, "yay")) {
+        setVotes(res.data);
       } else {
         setActive(true);
         setTime(res.data);
       }
     } catch (error: any) {
-      console.log(error.response.status);
-      setError(error.response.status);
-      console.log(error.response.data);
+      // console.log(error.response.status);
+      // setError(error.response.status);
+      console.log(error);
     }
   };
 
@@ -75,7 +78,12 @@ export default function Home(props: any) {
       <div className="my-4">
         <ContainerDiv>
           <div className="flex flex-row justify-between">
-            {active && <Countdown date={Date.now() + time * 1000} />}
+            {active && (
+              <Countdown
+                date={Date.now() + time * 1000}
+                onComplete={() => fetchVotes()}
+              />
+            )}
             <StartVote />
           </div>
         </ContainerDiv>

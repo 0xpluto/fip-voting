@@ -110,37 +110,35 @@ export default function App() {
 
   const createLabels = (d: any) => {
     let buffer: string[] = [];
-    console.log(Object.keys(d));
     Object.keys(d).map((l) => buffer.push(`FIP-${l}`));
     setLabels(buffer);
   };
 
   const createDatasets = (d: any) => {
     let buffer = [];
-    let yay: number[] = [];
-    let nay: number[] = [];
-    let abstain: number[] = [];
+    let yay: number[] = [1];
+    let nay: number[] = [2];
+    let abstain: number[] = [3];
     Object.keys(d).map((l) => {
       yay.push(d[l].yay);
       nay.push(d[l].nay);
       abstain.push(d[l].abstain);
     });
-    console.log(yay, nay, abstain);
     setDatasets([
       {
-        label: "No",
+        label: "Nay Votes",
         data: nay,
         // borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(249,53,53,0.8)",
       },
       {
-        label: "Abstain",
+        label: "Abstain Votes",
         data: abstain,
         // borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(249,171,53,0.8)",
       },
       {
-        label: "Yes",
+        label: "Yay Votes",
         data: yay,
         // borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53,249,53,0.8)",
