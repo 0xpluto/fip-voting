@@ -15,7 +15,7 @@ const WalletVotingPower = () => {
   const fetchVotingPower = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/filecoin/votingpower?network=mainnet&address=${address}`
+        `${process.env.NEXT_PUBLIC_API}/filecoin/votingpower?network=calibration&address=${address}`
       );
 
       console.log("Wallet Voting Power", res);
