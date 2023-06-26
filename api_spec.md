@@ -151,3 +151,30 @@ This endpoint will return a json vector of the fip numbers of votes that have co
     789
 ]
 ```
+
+### /filecoin/allconcludedvotes?network=calibration
+
+Query parameter `network` specifies which network to poll votes from. Some addresses are only registered to vote on testnet as they are only miners on testnet. `network` can be either `mainnet` or `calibration`.
+
+This endpoint will return a json map from the fip number to the vote results
+
+```json
+{
+    "9": {
+        "yay": 123,
+        "nay": 123,
+        "abstain": 123,
+        "yay_storage_size": 2048,
+        "nay_storage_size": 2048,
+        "abstain_storage_size": 2048
+    },
+    "11": {
+        "yay": 123,
+        "nay": 123,
+        "abstain": 123,
+        "yay_storage_size": 2048,
+        "nay_storage_size": 2048,
+        "abstain_storage_size": 2048
+    }
+}
+```
