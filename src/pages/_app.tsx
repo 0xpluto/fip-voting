@@ -4,6 +4,8 @@ import Layout from "../components/layout";
 import { WagmiConfig, createConfig, configureChains, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 
+import "react-toastify/dist/ReactToastify.css";
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [mainnet],
   [publicProvider()]
