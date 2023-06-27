@@ -1,3 +1,5 @@
+"use client";
+
 import { PropsWithChildren, useEffect } from "react";
 import ViewVote from "../components/ViewVote";
 import TotalVotes from "../components/TotalVotes";
@@ -27,7 +29,8 @@ export default function Home() {
       if (res[0].data.length > 0) {
         redirect(res[0].data[0]);
       } else {
-        redirect(res[1].data);
+        console.log(res[1].data[res[1].data.length - 1]);
+        redirect(res[1].data[res[1].data.length - 1]);
       }
     } catch (error) {
       console.log(error);

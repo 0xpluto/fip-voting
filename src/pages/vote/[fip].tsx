@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import ViewVote from "../../components/ViewVote";
 import TotalVotes from "../../components/TotalVotes";
@@ -107,9 +109,10 @@ export default function Home(props: any) {
             <WalletVotingPower />
           ) : (
             <VotingPower
-              yes={(votes as any).yay_storage_size}
-              no={(votes as any).nay_storage_size}
-              abstain={(votes as any).abstain_storage_size}
+              // yes={(votes as any).yay_storage_size}
+              // no={(votes as any).nay_storage_size}
+              // abstain={(votes as any).abstain_storage_size}
+              data={votes}
             />
           )}
         </ContainerDiv>

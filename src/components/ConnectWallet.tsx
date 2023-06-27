@@ -1,3 +1,5 @@
+"use client";
+
 import { useAccount, useConnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 

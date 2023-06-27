@@ -4,13 +4,32 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-type Props = {
-  yes: number;
-  no: number;
+type Votes = {
+  yay: number;
+  nay: number;
   abstain: number;
+  yay_storage_size: number;
+  nay_storage_size: number;
+  abstain_storage_size: number;
 };
 
-const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
+const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
+  const nan =
+    data.abstain_storage_size +
+      data.nay_storage_size +
+      data.yay_storage_size ===
+    0;
+
+  console.log(
+    nan
+      ? 0
+      : (data.yay_storage_size /
+          (data.yay_storage_size +
+            data.nay_storage_size +
+            data.abstain_storage_size)) *
+          100
+  );
+
   return (
     <div>
       <div className="text-sm text-neutral-400 mb-3">Voting Power</div>
@@ -18,43 +37,91 @@ const VotingPower: FunctionComponent<Props> = ({ yes, no, abstain }) => {
         <div style={{ width: "100px", height: "100px" }}>
           <CircularProgressbar
             className="basis-1/2 mr-3"
-            value={yes}
-            text={`${yes}%`}
+            value={
+              nan
+                ? 0
+                : (data.yay_storage_size /
+                    (data.yay_storage_size +
+                      data.nay_storage_size +
+                      data.abstain_storage_size)) *
+                  100
+            }
+            text={`${
+              nan
+                ? 0
+                : (data.yay_storage_size /
+                    (data.yay_storage_size +
+                      data.nay_storage_size +
+                      data.abstain_storage_size)) *
+                  100
+            }%`}
             styles={buildStyles({
               pathColor: `#228B22`,
               textColor: `#228B22`,
             })}
           />
         </div>
-        <div className="ml-5">{yes} TB</div>
+        <div className="ml-5">{data.yay_storage_size} TB</div>
       </div>
       <div className="flex flex-row items-center mb-3">
         <div style={{ width: "100px", height: "100px" }}>
           <CircularProgressbar
             className="basis-1/2 mr-3"
-            value={no}
-            text={`${no}%`}
+            value={
+              nan
+                ? 0
+                : (data.nay_storage_size /
+                    (data.nay_storage_size +
+                      data.nay_storage_size +
+                      data.abstain_storage_size)) *
+                  100
+            }
+            text={`${
+              nan
+                ? 0
+                : (data.nay_storage_size /
+                    (data.yay_storage_size +
+                      data.nay_storage_size +
+                      data.abstain_storage_size)) *
+                  100
+            }%`}
             styles={buildStyles({
               pathColor: `#ED2939`,
               textColor: `#ED2939`,
             })}
           />
         </div>
-        <div className="ml-5">{no} TB</div>
+        <div className="ml-5">{data.nay_storage_size} TB</div>
       </div>
       <div className="flex flex-row items-center">
         <div style={{ width: "100px", height: "100px" }}>
           <CircularProgressbar
             className="basis-1/2 mr-3"
-            value={abstain}
-            text={`${abstain}%`}
+            value={
+              nan
+                ? 0
+                : (data.abstain_storage_size /
+                    (data.yay_storage_size +
+                      data.nay_storage_size +
+                      data.abstain_storage_size)) *
+                  100
+            }
+            text={`${
+              nan
+                ? 0
+                : (data.abstain_storage_size /
+                    (data.yay_storage_size +
+                      data.nay_storage_size +
+                      data.abstain_storage_size)) *
+                  100
+            }%`}
             styles={buildStyles({
               pathColor: `#FDDA0D`,
               textColor: `#FDDA0D`,
             })}
           />
         </div>
-        <div className="ml-5">{abstain} TB</div>
+        <div className="ml-5">{data.abstain_storage_size} TB</div>
       </div>
     </div>
   );
