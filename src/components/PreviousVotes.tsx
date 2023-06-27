@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,6 +7,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Plugin,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
@@ -82,6 +83,8 @@ type Dataset = {
 };
 
 export default function App() {
+  const chartRef = useRef(null);
+
   const [fips, setFips] = useState(null);
   const [labels, setLabels] = useState<String[]>([]);
   const [datasets, setDatasets] = useState<Dataset[]>([]);
@@ -93,6 +96,26 @@ export default function App() {
   useEffect(() => {
     fetchPreviousVotes();
   }, []);
+
+  useEffect(() => {
+    const chart = chartRef.current;
+
+    if (chart) {
+      console.log("ChartJS", chart);
+    }
+  }, []);
+
+  const footer = (tooltip: any) => {
+    console.log("TOOL TIP", tooltip);
+    const keys = Object.keys(fips!);
+    const fip: any = fips![keys[tooltip[0].dataIndex]];
+    const sum = fip.yay + fip.nay + fip.abstain;
+    console.log("SUM", sum);
+    console.log("FIPS", fips![keys[tooltip[0].dataIndex]]);
+    return (
+      "Vote Power: " + (parseInt(tooltip[0].formattedValue) / sum) * 100 + "%"
+    );
+  };
 
   const fetchPreviousVotes = async () => {
     try {
@@ -148,7 +171,20 @@ export default function App() {
 
   return (
     <div className="md:px-56">
-      <Bar options={options} data={data} />
+      <Bar
+        ref={chartRef}
+        options={{
+          ...options,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                footer: footer,
+              },
+            },
+          },
+        }}
+        data={data}
+      />
     </div>
   );
 }
