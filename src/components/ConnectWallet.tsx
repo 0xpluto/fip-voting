@@ -1,14 +1,15 @@
 "use client";
 
-import { useAccount, useConnect } from "wagmi";
+import { useAccount, useConnect, useConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useState, useEffect } from "react";
 
 export default function ConnectWallet() {
   const [hasMounted, setHasMounted] = useState(false);
   const { address, isConnected } = useAccount();
+  const { connectors } = useConfig();
   const { connect } = useConnect({
-    connector: new InjectedConnector(),
+    connector: connectors[0],
   });
 
   // Hooks

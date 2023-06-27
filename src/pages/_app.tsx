@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import Layout from "../components/layout";
 import { WagmiConfig, createConfig, configureChains, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
+import { InjectedConnector } from "wagmi/connectors/injected";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +18,7 @@ const config = createConfig({
   autoConnect: true,
   publicClient,
   webSocketPublicClient,
+  connectors: [new InjectedConnector()],
 });
 
 export default function App({ Component, pageProps }: AppProps) {
