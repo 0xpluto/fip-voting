@@ -61,7 +61,7 @@ const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
             })}
           />
         </div>
-        <div className="ml-5">{data.yay_storage_size} TB</div>
+        <div className="ml-5">{data.yay_storage_size} bytes</div>
       </div>
       <div className="flex flex-row items-center mb-3">
         <div style={{ width: "100px", height: "100px" }}>
@@ -91,7 +91,7 @@ const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
             })}
           />
         </div>
-        <div className="ml-5">{data.nay_storage_size} TB</div>
+        <div className="ml-5">{data.nay_storage_size} bytes</div>
       </div>
       <div className="flex flex-row items-center">
         <div style={{ width: "100px", height: "100px" }}>
@@ -121,7 +121,7 @@ const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
             })}
           />
         </div>
-        <div className="ml-5">{data.abstain_storage_size} TB</div>
+        <div className="ml-5">{data.abstain_storage_size} bytes</div>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import { useAccount, useConnect, useEnsName } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import ContainerDiv from "@/components/ContainerDiv";
 import StartVote from "@/components/startVote";
+import RegisterVoteStarter from "@/components/voteStarter";
 import WalletVotingPower from "@/components/WalletVotingPower";
 import PreviousVotes from "../../components/PreviousVotes";
 
@@ -87,6 +88,7 @@ export default function Home(props: any) {
               />
             )}
             <StartVote />
+            <RegisterVoteStarter />
           </div>
         </ContainerDiv>
       </div>
