@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, FunctionComponent } from "react";
 import ContainerDiv from "../components/ContainerDiv";
 import { useSignMessage } from "wagmi";
 import axios from "axios";
 
-export default function startVote() {
+export default function StartVote<FunctionComponent>() {
   const [FIP, setFip] = useState("FIP-1");
   const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
     message: FIP,

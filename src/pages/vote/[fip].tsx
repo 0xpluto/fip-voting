@@ -2,28 +2,32 @@
 
 import { useEffect, useState } from "react";
 import ViewVote from "../../components/ViewVote";
-import TotalVotes from "../../components/TotalVotes";
-import VotingPower from "../../components/VotingPower";
+// import TotalVotes from "../../components/TotalVotes";
+// import VotingPower from "../../components/VotingPower";
 import Vote from "../../components/Vote";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import MarkdownIt from "markdown-it";
 import { useRouter } from "next/router";
 import Countdown from "react-countdown";
-import { useAccount, useConnect, useEnsName } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
 import ContainerDiv from "@/components/ContainerDiv";
 import StartVote from "@/components/startVote";
 import RegisterVoteStarter from "@/components/voteStarter";
-import WalletVotingPower from "@/components/WalletVotingPower";
-import PreviousVotes from "../../components/PreviousVotes";
+// import WalletVotingPower from "@/components/WalletVotingPower";
+import dynamic from "next/dynamic";
+
+const WalletVotingPower = dynamic(
+  () => import("@/components/WalletVotingPower")
+);
+const VotingPower = dynamic(() => import("../../components/VotingPower"), {
+  ssr: false,
+});
+const TotalVotes = dynamic(() => import("../../components/TotalVotes"), {
+  ssr: false,
+});
+const PreviousVotes = dynamic(() => import("../../components/PreviousVotes"));
 
 export default function Home(props: any) {
   const [active, setActive] = useState(false);
-  const { address, isConnected } = useAccount();
-  const { data: ensName } = useEnsName({ address });
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
   const [time, setTime] = useState(0);
   const [votes, setVotes] = useState<{
     yay: number;

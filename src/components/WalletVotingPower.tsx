@@ -6,10 +6,6 @@ const WalletVotingPower = () => {
   const { address, isConnected } = useAccount();
   const [votingPower, setVotingPower] = useState(0);
 
-  useEffect(() => {
-    if (isConnected) fetchVotingPower();
-  }, [address]);
-
   const fetchVotingPower = async () => {
     try {
       const res = await axios.get(
@@ -21,6 +17,10 @@ const WalletVotingPower = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (isConnected) fetchVotingPower();
+  }, [address, fetchVotingPower, isConnected]);
 
   return (
     <>

@@ -21,13 +21,14 @@ const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
     0;
 
   console.log(
-    nan
-      ? 0
-      : (data.yay_storage_size /
-          (data.yay_storage_size +
-            data.nay_storage_size +
-            data.abstain_storage_size)) *
-          100
+    "NAY",
+    data,
+    data.nay_storage_size + data.nay_storage_size + data.abstain_storage_size,
+    (data.nay_storage_size /
+      (data.nay_storage_size +
+        data.nay_storage_size +
+        data.abstain_storage_size)) *
+      100
   );
 
   return (
@@ -71,7 +72,7 @@ const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
               nan
                 ? 0
                 : (data.nay_storage_size /
-                    (data.nay_storage_size +
+                    (data.yay_storage_size +
                       data.nay_storage_size +
                       data.abstain_storage_size)) *
                   100
