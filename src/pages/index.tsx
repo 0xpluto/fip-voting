@@ -1,10 +1,10 @@
 "use client";
 
 import { PropsWithChildren, useEffect } from "react";
-import ViewVote from "../components/ViewVote";
-import TotalVotes from "../components/TotalVotes";
-import VotingPower from "../components/VotingPower";
-import ContainerDiv from "@/components/ContainerDiv";
+// import ViewVote from "../components/ViewVote";
+// import TotalVotes from "../components/TotalVotes";
+// import VotingPower from "../components/VotingPower";
+// import ContainerDiv from "@/components/ContainerDiv";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { BallTriangle } from "react-loader-spinner";
