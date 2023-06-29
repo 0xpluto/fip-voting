@@ -113,9 +113,7 @@ export default function StartVote() {
             onChange={(e) => setFip(e.target.value)}
           >
             {fips.map((f) => (
-              <option key={f} value={f}>
-                {f}
-              </option>
+              <option value={f}>{f}</option>
             ))}
           </select>
         </label>
