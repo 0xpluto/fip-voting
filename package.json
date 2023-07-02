@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export"
+    "export": "next export",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@types/node": "20.3.1",
@@ -36,6 +37,7 @@
     "wagmi": "^1.2.0"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3"
+    "@types/markdown-it": "^12.2.3",
+    "gh-pages": "^5.0.0"
   }
 }
