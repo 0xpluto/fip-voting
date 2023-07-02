@@ -14,21 +14,7 @@ import StartVote from "@/components/startVote";
 import RegisterVoteStarter from "@/components/voteStarter";
 // import WalletVotingPower from "@/components/WalletVotingPower";
 import dynamic from "next/dynamic";
-<<<<<<< HEAD
 import Token from "markdown-it/lib/token";
-=======
-
-const WalletVotingPower = dynamic(
-  () => import("@/components/WalletVotingPower")
-);
-const VotingPower = dynamic(() => import("../../components/VotingPower"), {
-  ssr: false,
-});
-const TotalVotes = dynamic(() => import("../../components/TotalVotes"), {
-  ssr: false,
-});
-const PreviousVotes = dynamic(() => import("../../components/PreviousVotes"));
->>>>>>> 381ac22ceacb64bcc30ea3bffbfc036be5364fe4
 
 const WalletVotingPower = dynamic(
   () => import("@/components/WalletVotingPower")

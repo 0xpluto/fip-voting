@@ -70,10 +70,6 @@ export default function App() {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/filecoin/allconcludedvotes?network=calibration`
       );
-<<<<<<< HEAD
-=======
-      console.log(res.data);
->>>>>>> 381ac22ceacb64bcc30ea3bffbfc036be5364fe4
       setFips(res.data);
       createLabels(res.data);
       createDatasets(res.data);
