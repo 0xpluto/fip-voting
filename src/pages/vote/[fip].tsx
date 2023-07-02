@@ -14,6 +14,7 @@ import StartVote from "@/components/startVote";
 import RegisterVoteStarter from "@/components/voteStarter";
 // import WalletVotingPower from "@/components/WalletVotingPower";
 import dynamic from "next/dynamic";
+import Token from "markdown-it/lib/token";
 
 const WalletVotingPower = dynamic(
   () => import("@/components/WalletVotingPower")
@@ -26,7 +27,9 @@ const TotalVotes = dynamic(() => import("../../components/TotalVotes"), {
 });
 const PreviousVotes = dynamic(() => import("../../components/PreviousVotes"));
 
-export default function Home(props: any) {
+export default function Home() {
+  const [notFound, setNotFound] = useState(false);
+  const [children, setChildren] = useState<Token[]>([]);
   const [active, setActive] = useState(false);
   const [time, setTime] = useState(0);
   const [votes, setVotes] = useState<{
@@ -46,12 +49,32 @@ export default function Home(props: any) {
   });
   const router = useRouter();
   const md = new MarkdownIt();
-  const children = md.parse(props.data, {})[2].children;
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchVotes();
-  }, []);
+  }, [router]);
+
+  useEffect(() => {
+    console.log(router.query.fip);
+    if (router.query.fip) {
+      fetchFipInfo(router.query.fip);
+    }
+  }, [router]);
+
+  const fetchFipInfo = async (fip: any) => {
+    try {
+      const res = await axios.get(
+        `https://raw.githubusercontent.com/filecoin-project/FIPs/master/FIPS/${fip}.md`
+      );
+      console.log("INFO", res.data);
+      const child = md.parse(res.data, {})[2].children;
+      setChildren(child!);
+    } catch (error) {
+      console.log(error);
+      setNotFound(true);
+    }
+  };
 
   const fetchVotes = async () => {
     setActive(false);
@@ -77,7 +100,9 @@ export default function Home(props: any) {
     }
   };
 
-  if (props.data === "notfound") {
+  console.log(children);
+
+  if (notFound) {
     return <ContainerDiv>No such FIP</ContainerDiv>;
   }
   return (
@@ -99,13 +124,15 @@ export default function Home(props: any) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <ContainerDiv>
-          <ViewVote
-            title={props && children![0].content}
-            description={props && children![2].content}
-            status={props && children![4].content}
-            author={props && children![8].content}
-            type={props && children![6].content}
-          />
+          {children.length > 0 ? (
+            <ViewVote
+              title={children![0].content}
+              description={children![2].content}
+              status={children![4].content}
+              author={children![8].content}
+              type={children![6].content}
+            />
+          ) : null}
         </ContainerDiv>
         <ContainerDiv>
           {!active ? <TotalVotes votes={votes} /> : <Vote />}
@@ -130,20 +157,4 @@ export default function Home(props: any) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(ctx: any) {
-  // Fetch data from external API
-  const { fip } = ctx.query;
-  try {
-    const res = await axios.get(
-      `https://raw.githubusercontent.com/filecoin-project/FIPs/master/FIPS/${fip}.md`
-    );
-    const data = res.data;
-
-    // Pass data to the page via props
-    return { props: { data } };
-  } catch (error) {
-    return { props: { data: "notfound" } };
-  }
 }

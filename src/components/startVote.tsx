@@ -75,7 +75,6 @@ export default function StartVote() {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/filecoin/voterstarters?network=calibration`
       );
-      console.log(res);
       setStarters(res.data);
     } catch (error) {
       console.log(error);
@@ -83,7 +82,6 @@ export default function StartVote() {
   };
 
   const fetchRepo = async () => {
-    console.log(process.env.NEXT_PUBLIC_OCTO);
     try {
       const buffer: string[] = [];
       const { data } = await axios.get(
@@ -99,8 +97,6 @@ export default function StartVote() {
       console.log(error);
     }
   };
-
-  console.log(fips);
 
   if (isStarter)
     return (

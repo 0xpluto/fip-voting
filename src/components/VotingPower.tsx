@@ -20,17 +20,6 @@ const VotingPower: FunctionComponent<{ data: Votes }> = ({ data }) => {
       data.yay_storage_size ===
     0;
 
-  console.log(
-    "NAY",
-    data,
-    data.nay_storage_size + data.nay_storage_size + data.abstain_storage_size,
-    (data.nay_storage_size /
-      (data.nay_storage_size +
-        data.nay_storage_size +
-        data.abstain_storage_size)) *
-      100
-  );
-
   return (
     <div>
       <div className="text-sm text-neutral-400 mb-3">Voting Power</div>
