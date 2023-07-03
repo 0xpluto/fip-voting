@@ -80,7 +80,7 @@ export default function Home() {
     setActive(false);
     try {
       const res = await axios.get(
-        `http://18.116.124.40/filecoin/vote?fip_number=${parseInt(
+        `${process.env.NEXT_PUBLIC_API}/filecoin/vote?fip_number=${parseInt(
           router.query.fip?.slice(-2) as string
         )}&network=calibration`
       );
