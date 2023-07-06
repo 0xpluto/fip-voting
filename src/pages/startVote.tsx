@@ -11,7 +11,7 @@ export default function StartVote<FunctionComponent>() {
       console.log("Settled", { data, error });
       axios
         .post(
-          `${process.env.NEXT_PUBLIC_API}/filecoin/startvote?network=calibration`,
+          `${process.env.NEXT_PUBLIC_API}/filecoin/startvote?network=mainnet`,
           {
             signature: data,
             message: FIP,

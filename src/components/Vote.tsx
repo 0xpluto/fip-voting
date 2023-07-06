@@ -17,7 +17,7 @@ const Vote: FunctionComponent = () => {
         .post(
           `${process.env.NEXT_PUBLIC_API}/filecoin/vote?fip_number=${parseInt(
             router.query.fip?.slice(-2) as string
-          )}&network=calibration`,
+          )}&network=mainnet`,
           {
             signature: data,
             message: `${message}: FIP-${parseInt(

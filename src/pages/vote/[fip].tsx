@@ -82,7 +82,7 @@ export default function Home() {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/filecoin/vote?fip_number=${parseInt(
           router.query.fip?.slice(-2) as string
-        )}&network=calibration`
+        )}&network=mainnet`
       );
       console.log(typeof res.data);
       console.log("INSDIE ", res.data);

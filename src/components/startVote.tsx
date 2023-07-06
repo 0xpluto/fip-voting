@@ -20,7 +20,7 @@ export default function StartVote() {
       console.log("Settled", { data, error });
       axios
         .post(
-          `${process.env.NEXT_PUBLIC_API}/filecoin/startvote?network=calibration`,
+          `${process.env.NEXT_PUBLIC_API}/filecoin/startvote?network=mainnet`,
           {
             signature: data,
             message: FIP,
@@ -73,7 +73,7 @@ export default function StartVote() {
   const fetchVoteStarters = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/filecoin/voterstarters?network=calibration`
+        `${process.env.NEXT_PUBLIC_API}/filecoin/voterstarters?network=mainnet`
       );
       setStarters(res.data);
     } catch (error) {

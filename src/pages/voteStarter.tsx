@@ -27,7 +27,7 @@ const Home = () => {
   const fetchVoteStarters = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/filecoin/voterstarters?network=calibration`
+        `${process.env.NEXT_PUBLIC_API}/filecoin/voterstarters?network=mainnet`
       );
       console.log(res);
       setStarters(res.data);

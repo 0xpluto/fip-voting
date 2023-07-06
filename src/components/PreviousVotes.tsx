@@ -68,7 +68,7 @@ export default function App() {
   const fetchPreviousVotes = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/filecoin/allconcludedvotes?network=calibration`
+        `${process.env.NEXT_PUBLIC_API}/filecoin/allconcludedvotes?network=mainnet`
       );
       setFips(res.data);
       createLabels(res.data);

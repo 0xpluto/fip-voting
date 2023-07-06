@@ -1,5 +1,5 @@
 {
-  "name": "teljon",
+  "name": "sp-vote",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "deploy": "gh-pages -d out"
+    "static": "next build && next export && touch ./out/.nojekyll",
+    "deploy": "gh-pages -d out -t true"
   },
   "dependencies": {
     "@types/node": "20.3.1",

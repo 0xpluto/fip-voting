@@ -19,10 +19,10 @@ export default function Home() {
     try {
       const res = await Promise.all([
         axios.get(
-          `${process.env.NEXT_PUBLIC_API}/filecoin/activevotes?network=calibration`
+          `${process.env.NEXT_PUBLIC_API}/filecoin/activevotes?network=mainnet`
         ),
         axios.get(
-          `${process.env.NEXT_PUBLIC_API}/filecoin/votehistory?network=calibration
+          `${process.env.NEXT_PUBLIC_API}/filecoin/votehistory?network=mainnet
           `
         ),
       ]);
